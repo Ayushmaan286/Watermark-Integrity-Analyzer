@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Watermark Robustness Lab — Creative UI</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">W</div>
+        <div class="title">Watermark <span>Lab</span></div>
+      </div>
+      <nav class="nav">
+        <button class="btn ghost" id="openGuide">How it works</button>
+        <button class="btn" id="downloadZip">Download Project</button>
+      </nav>
+    </header>
+
+    <main class="grid">
+      <aside class="panel left">
+        <div class="card upload-card">
+          <h3>Upload & Preview</h3>
+          <div id="dropZone" class="drop">Drag & Drop image here or <label class="link">browse<input id="fileInput" type="file" accept="image/*" hidden></label></div>
+          <div class="meta">
+            <div class="meta-item">File: <span id="fileName">-</span></div>
+            <div class="meta-item">Size: <span id="fileSize">-</span></div>
+          </div>
+          <div class="preview" id="preview"></div>
+        </div>
+
+        <div class="card controls">
+          <h3>Watermark Composer</h3>
+          <label>Type
+            <select id="wmType"><option value="text">Text</option><option value="image">Image</option></select>
+          </label>
+          <div id="textOptions">
+            <input id="wmText" placeholder="Type watermark text" value="SAMPLE - AYUSHMAAN" />
+            <div class="row">
+              <label>Opacity <input id="wmOpacity" type="range" min="0" max="1" step="0.05" value="0.25"></label>
+              <label>Size <input id="wmFontSize" type="range" min="16" max="160" value="48"></label>
+            </div>
+          </div>
+          <div id="imageOptions" style="display:none">
+            <input id="wmImageFile" type="file" accept="image/*" />
+            <label>Scale <input id="wmScale" type="range" min="0.05" max="0.6" step="0.01" value="0.18"></label>
+          </div>
+          <div class="row">
+            <button class="btn" id="addWm">Add Watermark</button>
+            <button class="btn ghost" id="clearPreview">Clear</button>
+          </div>
+        </div>
+
+        <div class="card edits">
+          <h3>Image Edits</h3>
+          <div class="row small">
+            <label>Operation <select id="editOp"><option value="resize">Resize</option><option value="crop">Crop</option></select></label>
+          </div>
+          <div id="resizeInputs">
+            <input id="resizeW" placeholder="width" type="number"> <input id="resizeH" placeholder="height" type="number">
+          </div>
+          <div id="cropInputs" style="display:none">
+            X <input id="cropX" type="number" placeholder="x"> Y <input id="cropY" type="number" placeholder="y"> <br>
+            W <input id="cropW" type="number" placeholder="w"> H <input id="cropH" type="number" placeholder="h">
+          </div>
+          <div class="row">
+            <button class="btn" id="applyEdit">Apply</button>
+            <button class="btn ghost" id="autoExperiment">Run Quick Test</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel center">
+        <div class="card workspace">
+          <div class="workspace-header">
+            <h2>Canvas</h2>
+            <div class="workspace-actions">
+              <button class="btn ghost" id="downloadImg">Download</button>
+              <button class="btn" id="openInspector">Inspector</button>
+            </div>
+          </div>
+          <div id="canvasWrap" class="canvasWrap">
+            <!-- main working image appended here -->
+            <div id="canvasHolder" class="canvasHolder empty">No image loaded</div>
+          </div>
+        </div>
+
+        <div class="card results">
+          <h3>Detection Panel</h3>
+          <div class="row small">
+            <input id="tplInput" placeholder="Template filename on server (eg wm_original.jpg)" />
+            <button class="btn" id="checkBtn">Check</button>
+          </div>
+          <pre id="detectionResult" class="log">Results will appear here</pre>
+        </div>
+      </section>
+
+      <aside class="panel right">
+        <div class="card stats">
+          <h3>Experiment Dashboard</h3>
+          <div class="statRow"><div>Tests run</div><div id="statTests">0</div></div>
+          <div class="statRow"><div>Detections</div><div id="statFound">0</div></div>
+          <div class="statRow"><div>Last score</div><div id="statScore">-</div></div>
+          <div class="mt">
+            <button class="btn" id="runBatch">Run Batch (demo)</button>
+          </div>
+        </div>
+
+        <div class="card about">
+          <h3>About</h3>
+          <p>This UI is a polished demo for your watermark robustness project. It connects to a FastAPI backend and provides a friendly, experiment-driven interface.</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- <footer class="footer"> -->
+      <!-- Built with ❤️ for third-year projects • Hint: use the server endpoints at <code>/upload/</code>, <code>/add-watermark/</code>, <code>/edit/</code>, <code>/check/</code> -->
+    <!-- </footer> -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
